@@ -1,0 +1,17 @@
+{
+  "name": "izvestia",
+  "version": "1.0.0",
+  "description": "Архив газеты «Известия» (по материалам yandex.ru)",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Михаил Беляков",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "redis": "^4.7.0",
+    "selenium-webdriver": "^4.29.0"
+  }
+}
