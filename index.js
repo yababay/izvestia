@@ -7,6 +7,7 @@ dotenv.config()
 
 const IZVESTIA_FROM = +(process.env.IZVESTIA_FROM || 0)
 const IZVESTIA_TO = +(process.env.IZVESTIA_TO || 0)
+const port = +(process.env.REDIS_PORT || 6379)
 const [ _, __, year, issue ] = process.argv
 
 const [ from, to ] = (() => {
@@ -25,7 +26,7 @@ const json = fs.readFileSync(fn)
 const issues = JSON.parse(json)
 const found = issues.filter(({num}) => num >= from && num <= to)
 const driver = await new Builder().forBrowser(Browser.FIREFOX).build();
-const client = redis.createClient()
+const client = redis.createClient({url: `redis://localhost:${port}`})
 await client.connect()
 
 const getPrefix = num => {
@@ -68,6 +69,7 @@ const savePage = async (num, url) => {
     } finally {
       await driver.sleep(2000)
       await driver.quit()
+      await client.save()
       await client.quit()
     }
 })()
