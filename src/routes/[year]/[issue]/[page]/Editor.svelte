@@ -21,7 +21,6 @@
         <div class="wrap">
             <Form {legend}>
                 <Textarea name="body" value={content.body || content.raw} rows={30}/>
-                <input type="hidden" value={`${issue}:page:${page}`}>        
                 <Submit>
                     <a class="btn btn-primary" {href} role="button" target="_blank" slot="options">На Яндексе</a>
                 </Submit>
