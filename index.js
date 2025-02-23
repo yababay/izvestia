@@ -7,6 +7,10 @@ dotenv.config()
 
 const IZVESTIA_FROM = +(process.env.IZVESTIA_FROM || 0)
 const IZVESTIA_TO = +(process.env.IZVESTIA_TO || 0)
+const WAIT_BETWEEN_PAGES = +(process.env.WAIT_BETWEEN_PAGES || 1000)
+const WAIT_BETWEEN_ISSUES = +(process.env.WAIT_BETWEEN_ISSUES || 1000)
+const BROWSER = process.env.BROWSER || 'FIREFOX'
+
 const port = +(process.env.REDIS_PORT || 6379)
 const [ _, __, year, issue ] = process.argv
 
@@ -25,7 +29,7 @@ if(!fs.existsSync(fn)) throw `no fuch file: ${fn}`
 const json = fs.readFileSync(fn)
 const issues = JSON.parse(json)
 const found = issues.filter(({num}) => num >= from && num <= to)
-const driver = await new Builder().forBrowser(Browser.FIREFOX).build();
+const driver = await new Builder().forBrowser(Browser[BROWSER]).build();
 const client = redis.createClient({url: `redis://localhost:${port}`})
 await client.connect()
 
@@ -47,6 +51,7 @@ const savePage = async (num, url) => {
   console.log(`... page ${pg}`)
   const key = `${getPrefix(num)}:page:${pg}`
   await client.hSet(key, 'raw', await raw.getText())
+  await driver.manage().setTimeouts({ implicit: WAIT_BETWEEN_PAGES })
 }
 
 ;(async () => {
@@ -60,10 +65,11 @@ const savePage = async (num, url) => {
         const urls = await Promise.all(
           pages.map(page => page.getAttribute('href'))
         )
-        await Promise.all(urls.map(url => savePage(num, url)))
+        for(const url of urls) await savePage(num, url)
         const key = getPrefix(num)
         await client.hSet(key, 'date', date)
         await client.hSet(key, 'id', id)
+        await driver.manage().setTimeouts({ implicit: WAIT_BETWEEN_ISSUES })
       }
     } catch (e) {
       console.log(`Error: ${e}`)
