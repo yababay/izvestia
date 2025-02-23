@@ -61,8 +61,9 @@ const savePage = async (num, url) => {
           pages.map(page => page.getAttribute('href'))
         )
         await Promise.all(urls.map(url => savePage(num, url)))
-        const key = `${getPrefix(num)}:date`
-        await client.set(key, date)
+        const key = getPrefix(num)
+        await client.hSet(key, 'date', date)
+        await client.hSet(key, 'id', id)
       }
     } catch (e) {
       console.log(`Error: ${e}`)
