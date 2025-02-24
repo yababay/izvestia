@@ -31,6 +31,11 @@
 
         section {
             grid-area: section;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+            padding-top: 3rem;
         }
     }
 </style>

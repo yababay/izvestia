@@ -15,5 +15,6 @@
 <style lang="scss">
     article {
         max-width: 80ch;
+        margin: 3rem auto;
     }
 </style>

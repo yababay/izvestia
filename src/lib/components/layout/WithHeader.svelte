@@ -1,4 +1,5 @@
 <script lang="ts">
+    import './styles/elements.scss'
     export let title: string = ''
 </script>
 

@@ -1,0 +1,21 @@
+.prev-month {
+    color: silver
+}
+.td-today {
+    font-weight: bold;
+    color: #01522d;
+    background-color: #d1e7dd;
+    border: 1px solid #a3cfbb;
+    border-radius: .375rem;
+}
+.td-square {
+    outline: none !important; 
+    cursor: pointer;
+    width: 1.5rem;
+    height: 1.5rem;
+    text-align: center;
+    font-family: monospace;
+}
+table {
+    border-collapse: unset;
+}

@@ -1,5 +1,6 @@
 <script lang="ts">
-    import Alert from "$lib/components/Alert.svelte";
+    import Alert from '$lib/components/Alert.svelte'
+    const greeting = `Здравствуйте`
 </script>
 
-<Alert>Введите в адресную строку номер выпуска и страницу</Alert>
+<Alert look="info">{greeting}</Alert>

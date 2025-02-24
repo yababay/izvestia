@@ -9,5 +9,6 @@ export type Topic = {
     year: number
     issue: number
     page: number
+    count: number
     content?: Content
 }
