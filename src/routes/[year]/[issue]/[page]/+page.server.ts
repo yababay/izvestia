@@ -40,6 +40,7 @@ export const actions = {
         const body = data.get('body')?.toString()
         if(!body) throw 'no body'
         await client.hSet(key, 'body', body)
+        await client.save()
         return await getPage(year, issue, page)
     }
 }

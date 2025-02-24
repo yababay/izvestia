@@ -4,12 +4,20 @@
     import Textarea from "$lib/components/input/Textarea.svelte"
     import Submit from "$lib/components/Submit.svelte"
     import type { Topic } from "$lib/types";
+    import { oldToModern } from "$lib/util";
 
     export let data: Topic
 
-    const { content, page, issue, year, date, id } = data
-    const legend = `№${issue} за ${date} ${year} г., стр. ${page}`
+    const { content, page, issue, date, id } = data
+    const legend = `№${issue} за ${date} г., стр. ${page}`
     const href = `https://yandex.ru/archive/catalog/${id}/${page}`
+
+    const header = `# ИЗВЕСТИЯ ПЕТРОГРАДСКОГО СОВЕТА 
+## Рабочих депутатов
+
+_№${issue}. ${date} года. Стр. ${page}_
+
+`
 
 </script>
 
@@ -20,7 +28,7 @@
         </div> 
         <div class="wrap">
             <Form {legend}>
-                <Textarea name="body" value={content.body || content.raw} rows={30}/>
+                <Textarea name="body" value={content.body || header + oldToModern(content.raw)} rows={30}/>
                 <Submit>
                     <a class="btn btn-primary" {href} role="button" target="_blank" slot="options">На Яндексе</a>
                 </Submit>
