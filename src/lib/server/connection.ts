@@ -1,6 +1,6 @@
 import { createClient } from 'redis'
 import { REDIS_PORT } from '$env/static/private'
-import type { Content, Topic } from '$lib/types'
+import type { Content, Page } from '$lib/types'
 
 export const client = createClient({url: `redis://localhost:${REDIS_PORT}`})
 
@@ -46,7 +46,7 @@ export const getIssueKey = (year: string, num: string) => {
     return `${prefix}:${num}`
 }
 
-type YearId = Pick<Topic, 'date' | 'id'>
+type YearId = Pick<Page, 'date' | 'id'>
 
 export const getPage = async (year: string, issue: string, page: string) => {
     const client = await getConnection()

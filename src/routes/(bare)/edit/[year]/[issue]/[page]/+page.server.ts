@@ -18,5 +18,5 @@ export const actions = {
         await client.hSet(key, 'body', body)
         await client.save()
         return await getPage(year, issue, page)
-    }
+    },
 }

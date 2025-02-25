@@ -3,10 +3,10 @@
     import Form from "$lib/components/Form.svelte"
     import Textarea from "$lib/components/input/Textarea.svelte"
     import Submit from "$lib/components/Submit.svelte"
-    import type { Topic } from "$lib/types";
+    import type { Page } from "$lib/types";
     import { oldToModern } from "$lib/util";
 
-    export let data: Topic
+    export let data: Page
 
     const { content, page, issue, date, id } = data
     const legend = `№${issue} за ${date} г., стр. ${page}`
@@ -26,8 +26,11 @@ _№${issue}. ${date} года. Стр. ${page}_
     <div class="wrap">
         <Form {legend}>
             <Textarea name="body" value={content.body || header + oldToModern(content.raw)} rows={35}/>
+            <input type="hidden" name="date" value={date}>
             <Submit>
-                <a class="btn btn-primary" {href} role="button" target="_blank" slot="options">На Яндексе</a>
+                <span slot="options">
+                    <a class="btn btn-primary" {href} role="button" target="_blank">На Яндексе</a>
+                </span>
             </Submit>
         </Form>
     </div>
@@ -37,7 +40,7 @@ _№${issue}. ${date} года. Стр. ${page}_
 
 <style lang="scss">
     .wrap {
-        height: 95vh;
+        height: 90vh;
         width: 80ch;
     }
 </style>

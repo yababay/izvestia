@@ -1,4 +1,4 @@
-import { getPage } from "$lib/server/connection"
+import { getConnection, getPage } from "$lib/server/connection"
 
 export const csr = false
 
@@ -8,4 +8,24 @@ export const load = async ({params, url}) => {
     const props = await getPage(year, issue, page)
     const { hostname } = url
     return { ...props, date, local: hostname === 'localhost' }
+}
+
+export const actions = {
+    default: async ({params, request, url}) => {
+        const { year, issue, page } = params
+        const data = await request.formData()
+        const body = data.get('topic')?.toString().trim()
+        const date = data.get('date')?.toString().trim()
+        const href = data.get('href')?.toString().trim()
+        const description = data.get('description')?.toString().trim()
+        if(!(body && date)) throw 'no body or date'
+        const client = await getConnection()
+        await client.incr('topic:count')
+        const id = +(await client.incr('topic:count')) + 10000000
+        const key = `topic:${date}:_${id}`.replace(/\:_1/, ':')
+        await client.set(key, `${body}\n\n${description}\n\n[Источник](${href})`)
+        const props = await getPage(year, issue, page)
+        const { hostname } = url
+        return { ...props, date, local: hostname === 'localhost' }
+    },
 }

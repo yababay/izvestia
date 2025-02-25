@@ -35,7 +35,7 @@
 
 {#if count > 1}
 
-<nav aria-label="pagination" class="w-75 d-flex align-items-center justify-content-end gap-3">
+<nav aria-label="pagination" class="w-100 d-flex align-items-center justify-content-end gap-3 me-5">
   <ul class="pagination">
     {#if leftLimit}
       <Limit num={1} {prefix} {postfix}/>
