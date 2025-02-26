@@ -9,6 +9,11 @@ const IZVESTIA_FROM = +(process.env.IZVESTIA_FROM || 0)
 const IZVESTIA_TO = +(process.env.IZVESTIA_TO || 0)
 const WAIT_BETWEEN_PAGES = +(process.env.WAIT_BETWEEN_PAGES || 1000)
 const WAIT_BETWEEN_ISSUES = +(process.env.WAIT_BETWEEN_ISSUES || 1000)
+const WAIT_BETWEEN_SERIES = +(process.env.WAIT_BETWEEN_SERIES || 1000)
+
+const variateTimeout = num => Math.round(num / 2 + Math.random() * num)
+
+//const BROWSER = IZVESTIA_FROM % 10 ? 'FIREFOX' : 'CHROME'
 const BROWSER = process.env.BROWSER || 'FIREFOX'
 
 const port = +(process.env.REDIS_PORT || 6379)
@@ -51,7 +56,7 @@ const savePage = async (num, url) => {
   console.log(`... page ${pg}`)
   const key = `${getPrefix(num)}:page:${pg}`
   await client.hSet(key, 'raw', await raw.getText())
-  await driver.manage().setTimeouts({ implicit: WAIT_BETWEEN_PAGES })
+  await driver.sleep(variateTimeout(WAIT_BETWEEN_PAGES)) //.manage().setTimeouts({ explicit: WAIT_BETWEEN_PAGES })
 }
 
 ;(async () => {
@@ -69,12 +74,12 @@ const savePage = async (num, url) => {
         const key = getPrefix(num)
         await client.hSet(key, 'date', date)
         await client.hSet(key, 'id', id)
-        await driver.manage().setTimeouts({ implicit: WAIT_BETWEEN_ISSUES })
+        await driver.sleep(variateTimeout(WAIT_BETWEEN_ISSUES)) //.manage().setTimeouts({ explicit: WAIT_BETWEEN_ISSUES })
       }
     } catch (e) {
       console.log(`Error: ${e}`)
     } finally {
-      await driver.sleep(2000)
+      await driver.sleep(WAIT_BETWEEN_SERIES)
       await driver.quit()
       await client.save()
       await client.quit()
