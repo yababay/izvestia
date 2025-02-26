@@ -6,6 +6,8 @@ export const client = createClient({url: `redis://localhost:${REDIS_PORT}`})
 
 let isConnected = false
 
+export const prependZeroes = (id: number | string) => `${+id + 10000000}`.replace(/^1/, '')
+
 export const byDate = async (date: string) => {
     const search  = `?date=${date}`
     if(/^\d{4}$/.test(date)) return `/${date}/1/1${search}`

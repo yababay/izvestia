@@ -1,4 +1,4 @@
-import { getConnection, getPage } from "$lib/server/connection"
+import { getConnection, getPage, prependZeroes } from "$lib/server/connection"
 
 export const csr = false
 
@@ -21,8 +21,8 @@ export const actions = {
         if(!(body && date)) throw 'no body or date'
         const client = await getConnection()
         await client.incr('topic:count')
-        const id = +(await client.incr('topic:count')) + 10000000
-        const key = `topic:${date}:_${id}`.replace(/\:_1/, ':')
+        const id = await client.incr('topic:count')
+        const key = `topic:${date}:${prependZeroes(id)}`
         await client.set(key, `${body}\n\n${description}\n\n[Источник](${href})`)
         const props = await getPage(year, issue, page)
         const { hostname } = url

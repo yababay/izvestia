@@ -2,6 +2,6 @@
     import { BareLayout } from '$lib/components'
 </script>
 
-<BareLayout title="Публикация в Телеграм">
+<BareLayout title="Подготовка публикаций">
     <slot />
 </BareLayout>
