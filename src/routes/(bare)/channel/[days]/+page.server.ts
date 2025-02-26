@@ -30,7 +30,7 @@ export const actions = {
         await client.set(key, topic)
         const [ _, date, id ] = /.*\:\d{4}\-([\d\-]+)\:(\d+)/.exec(key) || []
         if(!(date && id)) throw 'no date or id in the key'
-        await client.sAdd(`publish:${date}`, +id + '')
+        await client.sAdd(`approved:${date}`, +id + '')
         const { days } = params
         return getPage(+days)   
         },
