@@ -1,1 +1,0 @@
-import{t as n,a}from"../chunks/C-V7koEK.js";import"../chunks/CNXGhc8a.js";import{n as p}from"../chunks/CuqPCOm1.js";import{A as s}from"../chunks/CHJ0qrLc.js";function c(o){const e="Здравствуйте";s(o,{look:"info",children:(r,i)=>{p();var t=n();t.nodeValue=e,a(r,t)},$$slots:{default:!0}})}export{c as component};

@@ -1,9 +1,0 @@
-const index = 3;
-let component_cache;
-const component = async () => component_cache ??= (await import('./_layout.svelte-DzFZ5KtT.js')).default;
-const imports = ["_app/immutable/nodes/3.mfSm89P3.js","_app/immutable/chunks/C-V7koEK.js","_app/immutable/chunks/CuqPCOm1.js","_app/immutable/chunks/CNXGhc8a.js","_app/immutable/chunks/BfnAL8MM.js","_app/immutable/chunks/B0AT_9hh.js","_app/immutable/chunks/DlZK0vjG.js","_app/immutable/chunks/Bk6oNkak.js","_app/immutable/chunks/CNUPf0XL.js","_app/immutable/chunks/BO3cye2v.js","_app/immutable/chunks/B9IOJEXW.js","_app/immutable/chunks/CYgJF_JY.js","_app/immutable/chunks/Js0jPM36.js"];
-const stylesheets = ["_app/immutable/assets/Alert.8vHm7ddm.css","_app/immutable/assets/Form.DjI1pf8O.css","_app/immutable/assets/WithAside.BrkHt9qk.css","_app/immutable/assets/Article.DTjfKkyD.css","_app/immutable/assets/Bare.APR5kRJn.css"];
-const fonts = [];
-
-export { component, fonts, imports, index, stylesheets };
-//# sourceMappingURL=3-BHDUn10p.js.map

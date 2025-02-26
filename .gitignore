@@ -4,3 +4,4 @@ issues/*.html
 .env.*
 .data
 .svelte-kit
+build

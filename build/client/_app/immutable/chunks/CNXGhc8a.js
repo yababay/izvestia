@@ -1,1 +1,0 @@
-import{X as a}from"./CuqPCOm1.js";a();

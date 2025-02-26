@@ -1,1 +1,0 @@
-{"version":3,"file":"public-DwE-3akR.js","sources":["../../../.svelte-kit/adapter-node/chunks/public.js"],"sourcesContent":["const PUBLIC_CALENDAR_START = \"1917-02-28\";\nconst PUBLIC_MAIN_TITLE = \"Архив газеты «Известия»\";\nexport {\n  PUBLIC_CALENDAR_START as P,\n  PUBLIC_MAIN_TITLE as a\n};\n"],"names":[],"mappings":"AAAK,MAAC,qBAAqB,GAAG;AACzB,MAAC,iBAAiB,GAAG;;;;"}
