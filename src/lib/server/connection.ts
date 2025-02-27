@@ -4,8 +4,6 @@ import type { Content, Page } from '$lib/types'
 
 export const client = createClient({url: `redis://localhost:${REDIS_PORT}`})
 
-let isConnected = false
-
 export const prependZeroes = (id: number | string) => `${+id + 10000000}`.replace(/^1/, '')
 
 export const byDate = async (date: string) => {
@@ -34,9 +32,8 @@ export const byDate = async (date: string) => {
 }
 
 export const getConnection = async () => {
-    if(isConnected) return client
+    if(client.isOpen) return client
     await client.connect()
-    isConnected = true
     return client
 }
 
