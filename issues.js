@@ -9,7 +9,6 @@ const BROWSER = process.env.BROWSER || 'FIREFOX'
 const WAIT_BETWEEN_ISSUES = +(process.env.WAIT_BETWEEN_ISSUES || 1000)
 const IZVESTIA_FROM = +(process.env.IZVESTIA_FROM || 0)
 const IZVESTIA_TO = +(process.env.IZVESTIA_TO || 0)
-const RUN_HEADLESS = !!(process.env.RUN_HEADLESS || 0)
 
 const [ _, __, year ] = process.argv
 if(!year) throw 'no year'
