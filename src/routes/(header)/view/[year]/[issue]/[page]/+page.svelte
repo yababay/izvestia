@@ -20,29 +20,23 @@
 </script>
 
 <Pagination {count} current={page} {prefix} {postfix}>
-    <ul class="pagination ms-5">
-        {#if local}
-            <li class="page-item">
-                <a target="_blank" href={edit} title="Править" aria-label="Править"><i class="bi bi-pencil p-2"></i></a>
-            </li>
-            <li class="page-item">
-                <a target="_blank" href="/channel" title="Управление каналом" aria-label="Управление каналом"><i class="bi bi-telegram p-2"></a>
-            </li>
-        {/if}
-        <li class="page-item">
-            <a {href} target="_blank" title="Источник в Яндекс-архиве" aria-label="Источник в Яндекс-архиве"><i class="bi bi-link p-2"></i></a>
-        </li>
-    </ul>
+    <p class="instruction ms-2">Ctrl+P - публиковать<br> Ctrl+E - редактировать</p>
 </Pagination>
 
-{#if local}
-    <div class="mt-3 pe-3 text-end w-100">
-        <Publisher {date} {description} {href} />
-    </div>
-{/if}
-
 <Article {readme}/>
+
+<div class="mt-3 pe-3 text-end w-100 mb-5">
+    <Publisher {date} {description} {href} />
+</div>
 
 <svelte:head>
     <script src="/publish.js" defer></script>
 </svelte:head>
+
+<style lang="scss">
+    .instruction {
+        font-size: smaller;
+        padding-bottom: .1rem;
+        color: grey;
+    }
+</style>

@@ -1,26 +1,27 @@
 <script lang="ts">
-    import WithAside from '$lib/components/layout/WithAside.svelte'
     import Calendar from '$lib/components/calendar/ssr/index.svelte'
-    import WithHeader from '$lib/components/layout/WithHeader.svelte';
+    import WithMenu from '$lib/components/layout/WithMenu.svelte';
+    import WithAside from '$lib/components/layout/WithAside.svelte';
     import { PUBLIC_MAIN_TITLE } from '$env/static/public'
+    import { items } from './menu'
 
     export let data: {choosen: Date}
 
     const { choosen } = data
+    const title = PUBLIC_MAIN_TITLE
+    const brand = title
 
 </script>
 
-<WithHeader>
-    <h1 class="ms-5" slot="header">{PUBLIC_MAIN_TITLE}</h1>
-    <WithAside >
+<WithMenu {items} {brand} {title}>
+    <WithAside>
         <div slot="aside" class="p-2">
             <h6>Выбор по дате</h6>
             <Calendar prefix="/view" {choosen} />
         </div>
         <slot />
     </WithAside>
-</WithHeader>
-
+</WithMenu>
 
 <style lang="scss">
     h6 {
