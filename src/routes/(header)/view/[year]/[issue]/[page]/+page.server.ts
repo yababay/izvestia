@@ -23,7 +23,7 @@ export const actions = {
         await client.incr('topic:count')
         const id = await client.incr('topic:count')
         const key = `topic:${date}:${prependZeroes(id)}`
-        await client.set(key, `${body}\n\n${description}\n\n[Источник](${href})`)
+        await client.set(key, `${body}\n\n[${description}](${href})`)
         const props = await getPage(year, issue, page)
         const { hostname } = url
         return { ...props, date, local: hostname === 'localhost' }

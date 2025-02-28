@@ -9,8 +9,18 @@ const getPage = async (days: number) => {
     if(!monthDay) throw 'bad day'
     const client = await getConnection()
     const pattern = `topic:*${monthDay}:*`
-    const keys = await client.keys(pattern)
-    return {page: days, topics: await Promise.all(keys.map(key => client.get(key)))
+    const approved = (await client.sMembers(`approved:${monthDay}`)).map(num => +num)
+    const keys = (await client.keys(pattern))
+        .filter(key => {
+            const arr = /^topic\:.*\:(\d+)$/.exec(key) || []
+            const [ _, num ] = arr
+            console.log(key, num, 'num')
+            if(!num) return false
+            return !approved.includes(+num)
+        })
+        .sort()
+    console.log(approved, keys, pattern)
+    return {approved, page: days, topics: await Promise.all(keys.map(key => client.get(key)))
         .then(topics => topics.map((body, i) => ({body, key: keys[i]})))
     }
 }

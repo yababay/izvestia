@@ -3,9 +3,9 @@
 import type { Topic } from '$lib/types'
     import Card from './Card.svelte'
 
-    export let data: {topics: Topic[], page: number}
+    export let data: {topics: Topic[], page: number, approved: number[]}
     
-    const { topics, page } = data
+    const { topics, page, approved } = data
 
     const today = new Date
     today.setDate(today.getDate() + 3)
@@ -20,6 +20,10 @@ import type { Topic } from '$lib/types'
 
 </script>
 
+{#if approved.length}
+  <h5 class="mt-5 mb-3">Готовых к публикации сообщений: {approved.length}.</h5>
+{/if}
+
 <div class="d-flex align-items-center">
   <span class="nav-header">Предстоящие публикации:&nbsp;</span>
   <ul class="pagination ms-2">
@@ -31,12 +35,12 @@ import type { Topic } from '$lib/types'
   </ul>
 </div>
 
-{#if topics.length}
-<div class="w-75 d-flex flex-wrap justify-content-between gap-5 mt-5">
-  {#each topics as {body, key} }
-    <Card {body} {key} />
-  {/each}
-</div>
+{#if topics.length || approved.length}
+  <div class="w-75 d-flex flex-wrap justify-content-between gap-5 mt-5">
+    {#each topics as {body, key} }
+      <Card {body} {key} />
+    {/each}
+  </div>
 {:else}
   <Alert look="info">Сообщения не найдены. <a href="/view" class="link-info">Подготовьте их.</a></Alert>
 {/if}
