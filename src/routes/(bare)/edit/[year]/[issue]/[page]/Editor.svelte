@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Alert from "$lib/components/Alert.svelte";
+    import Alert from "$lib/components/Alert.svelte"
     import Form from "$lib/components/Form.svelte"
     import Textarea from "$lib/components/input/Textarea.svelte"
     import Submit from "$lib/components/Submit.svelte"
@@ -8,7 +8,7 @@
 
     export let data: Page
 
-    const { content, page, issue, date, id } = data
+    const { content, page, issue, date, id, year } = data
     const legend = `№${issue} за ${date} г., стр. ${page}`
     const href = `https://yandex.ru/archive/catalog/${id}/${page}`
 
@@ -30,9 +30,10 @@ _№${issue}. ${date} года. Стр. ${page}_
             <Textarea name="body" value={content.body || header + oldToModern(content.raw)} rows={35}/>
             <input type="hidden" name="date" value={date}>
             <Submit>
-                <span slot="options">
+                <!-- span slot="options">
                     <a class="btn btn-primary" {href} role="button" target="_blank">На Яндексе</a>
-                </span>
+                    <a class="btn btn-primary" href={window.location.toString().replace('edit', 'view')} role="button">Просмотр</a>
+                </span -->
             </Submit>
         </Form>
     </div>

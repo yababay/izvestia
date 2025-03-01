@@ -12,5 +12,5 @@
 <svelte:head>
     <meta name="description" content={description} />
     <meta name="origin" content={origin} />
-    <script src="/publish.js" defer></script>
+    <script src="/edit.js" defer></script>
 </svelte:head>
